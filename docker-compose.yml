@@ -1,0 +1,16 @@
+services:
+  sshd:
+    image: lscr.io/linuxserver/openssh-server:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PUBLIC_KEY_FILE=/run/secrets/my_secret
+    volumes:
+      - ./.bash_history:/root/.bash_history
+    secrets:
+      - my_secret
+
+secrets:
+  my_secret:
+    file: id_ed25519.pub
